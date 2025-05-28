@@ -1,13 +1,12 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import queueRouter from "../routes/queue.routes";
-import authRouter from "../routes/auth.routes";
-import adminRouter from "../routes/admin.routes";
-import { initSocket } from "../socket";
+import queueRouter from "./routes/queue.routes";
+import authRouter from "./routes/auth.routes";
+import adminRouter from "./routes/admin.routes";
+import { initSocket } from "./socket";
 import http from "http";
-import ticketRouter from "../routes/ticket.routes";
-import ServerlessHttp from "serverless-http";
+import ticketRouter from "./routes/ticket.routes";
 
 dotenv.config();
 
@@ -30,8 +29,6 @@ app.use((err: any, _req: any, res: any, _next: any) => {
 const server = http.createServer(app);
 initSocket(server);
 
-app.get("/api/hello", (req, res) => {
-  res.json({ message: "Hello from Vercel!" });
+server.listen(4000, () => {
+  console.log("🚀  http://localhost:4000");
 });
-
-module.exports.handler = ServerlessHttp(app);
