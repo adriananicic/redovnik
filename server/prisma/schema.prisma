@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id       String    @id @default(cuid())
+  email    String    @unique
+  name     String
+  password String
+  counters Counter[]
+  Queue    Queue[]
+}
+
+model Queue {
+  id        String    @id @default(cuid())
+  name      String
+  location  String
+  startsAt  DateTime
+  creator   Admin     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  creatorId String
+  counters  Counter[]
+  tickets   Ticket[]
+}
+
+model Counter {
+  id      String   @id @default(cuid())
+  label   String
+  queue   Queue    @relation(fields: [queueId], references: [id], onDelete: Cascade)
+  queueId String
+  admin   Admin    @relation(fields: [adminId], references: [id])
+  adminId String
+  tickets Ticket[]
+
+  @@unique([queueId, label])
+}
+
+model Ticket {
+  id        String       @id @default(cuid())
+  number    Int
+  status    TicketStatus @default(WAITING)
+  queue     Queue        @relation(fields: [queueId], references: [id], onDelete: Cascade)
+  queueId   String
+  counter   Counter?     @relation(fields: [counterId], references: [id])
+  counterId String?
+}
+
+enum TicketStatus {
+  WAITING
+  CALLED
+  DONE
+}
