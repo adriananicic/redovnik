@@ -16,6 +16,11 @@ export function useQueueData(queueId: string) {
   useEffect(() => {
     let cancelled = false;
 
+    console.log(
+      "FETCHING:",
+      `${process.env.NEXT_PUBLIC_API_URL}/api/queue/${queueId}`
+    );
+
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/queue/${queueId}`)
       .then((r) => r.json())
       .then((q) => {
