@@ -32,7 +32,7 @@ npm run dev
 
 ### 3. Set Up the Client
 
-create an .env.local file in /server and paste 
+create an .env.local file in /frontend and paste 
 ```
 NEXT_PUBLIC_API_URL=http://localhost:4000
 ```
