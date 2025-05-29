@@ -22,7 +22,10 @@ export function useQueueData(queueId: string) {
     );
 
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/queue/${queueId}`)
-      .then((r) => r.json())
+      .then((r) => {
+        console.log(r);
+        return r.json();
+      })
       .then((q) => {
         if (cancelled) return;
         setQueue(q);

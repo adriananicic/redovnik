@@ -88,6 +88,7 @@ queueRouter.post("/:id/ticket", async (req, res, next) => {
 
 /* jedan red + šalteri + tiketi */
 queueRouter.get("/:id", async (req, res, next) => {
+  console.log("inside backend");
   try {
     const queue = await prisma.queue.findUnique({
       where: { id: req.params.id },
@@ -106,10 +107,12 @@ queueRouter.get("/:id", async (req, res, next) => {
         },
       },
     });
+    console.log("queue", queue);
     queue
       ? res.json(queue)
       : res.status(404).json({ error: "Red nije pronađen" });
   } catch (err) {
+    console.log(err);
     next(err);
   }
 });
