@@ -3,7 +3,6 @@ export const dynamic = "force-dynamic";
 
 import { useCreateQueueForm } from "../../hooks/useCreateQueueForm";
 import { useCounters } from "../../hooks/useCounters";
-import Link from "next/link";
 import AdminCounterCard from "@/components/AdminCounterCard";
 
 export default function AdminHome() {

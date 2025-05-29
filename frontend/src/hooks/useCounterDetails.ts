@@ -9,18 +9,6 @@ export function useCounterDetails(counterId: string) {
   const [lastCalled, setLastCalled] = useState<any>(null);
   const [queueLength, setQueueLength] = useState<number | null>(null);
 
-  const fetchDetails = async (cid: string, queueId: string) => {
-    const q = await api(`/api/queue/${queueId}`, {}, auth);
-    const waitingCount = q.tickets.filter(
-      (t: any) => t.status === "WAITING"
-    ).length;
-    const current = q.tickets.find(
-      (t: any) => t.status === "CALLED" && t.counter?.id === cid
-    );
-    setQueueLength(waitingCount);
-    setLastCalled(current || null);
-  };
-
   useEffect(() => {
     if (!auth || !counterId) return;
 
@@ -37,6 +25,17 @@ export function useCounterDetails(counterId: string) {
       .finally(() => setLoading(false));
   }, [auth, counterId]);
 
+  const fetchDetails = async (cid: string, queueId: string) => {
+    const q = await api(`/api/queue/${queueId}`, {}, auth);
+    const waitingCount = q.tickets.filter(
+      (t: any) => t.status === "WAITING"
+    ).length;
+    const current = q.tickets.find(
+      (t: any) => t.status === "CALLED" && t.counter?.id === cid
+    );
+    setQueueLength(waitingCount);
+    setLastCalled(current || null);
+  };
   return {
     counter,
     queueLength,

@@ -16,15 +16,9 @@ export function useQueueData(queueId: string) {
   useEffect(() => {
     let cancelled = false;
 
-    console.log(
-      "FETCHING:",
-      `${process.env.NEXT_PUBLIC_API_URL}/api/queue/${queueId}`
-    );
-
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/queue/${queueId}`)
       .then(async (res) => {
         const text = await res.text();
-        console.log("RAW RESPONSE:", text);
         return JSON.parse(text); // just to throw the error again
       })
       .then((q) => {
@@ -32,8 +26,7 @@ export function useQueueData(queueId: string) {
         setQueue(q);
         setTickets(q.tickets);
         setMyId(localStorage.getItem(`ticket-${queueId}`));
-      })
-      .catch((er) => console.log("er", er));
+      });
 
     const s = getSocket();
     const onCalled = (t: Ticket) => {
