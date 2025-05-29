@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-dynamic";
 
 import { useCreateQueueForm } from "../../hooks/useCreateQueueForm";
 import { useCounters } from "../../hooks/useCounters";

@@ -1,4 +1,6 @@
 "use client";
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
 
 import { useParams } from "next/navigation";
 import { useCounterDetails } from "@/hooks/useCounterDetails";
