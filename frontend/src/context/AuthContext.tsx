@@ -58,6 +58,7 @@ export async function api(
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
     ...init,
     headers: { "Content-Type": "application/json", ...headers },
+    cache: "no-store",
   });
 
   const json = await res.json();
