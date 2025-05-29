@@ -22,9 +22,10 @@ export function useQueueData(queueId: string) {
     );
 
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/queue/${queueId}`)
-      .then((r) => {
-        console.log(r);
-        return r.json();
+      .then(async (res) => {
+        const text = await res.text();
+        console.log("RAW RESPONSE:", text);
+        return JSON.parse(text); // just to throw the error again
       })
       .then((q) => {
         if (cancelled) return;
