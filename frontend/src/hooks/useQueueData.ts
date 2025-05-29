@@ -28,7 +28,8 @@ export function useQueueData(queueId: string) {
         setQueue(q);
         setTickets(q.tickets);
         setMyId(localStorage.getItem(`ticket-${queueId}`));
-      });
+      })
+      .catch((er) => console.log("er", er));
 
     const s = getSocket();
     const onCalled = (t: Ticket) => {
