@@ -16,9 +16,11 @@ cd redovnik
 ### 2. Set Up the Server
 
 create an .env file in /server and paste
+```
 DATABASE_URL="postgresql://neondb_owner:npg_RIiKpg4mjY5N@ep-hidden-wave-a9eovke5-pooler.gwc.azure.neon.tech/neondb?sslmode=require"
 JWT_SECRET="supersupertajna"
 FRONTEND_ORIGIN="http://localhost:3000"
+```
 
 in your terminal:
 ```
@@ -31,7 +33,9 @@ npm run dev
 ### 3. Set Up the Client
 
 create an .env.local file in /server and paste 
+```
 NEXT_PUBLIC_API_URL=http://localhost:4000
+```
 
 ```
 cd ../frontend
